@@ -63,7 +63,7 @@ body > * {
 }
 
 main, header, nav, article, aside, footer, section {
-  background-color: rgba(0,255,0,0.5);
+  background-color: rgba(222, 225, 226, 0.5);
   padding: 1%;
 }
 
@@ -126,10 +126,13 @@ aside {
 
 aside a {
   display: block;
-  float: left;
   width: 50%;
 }
 
+.foto { 
+  display: flex;
+  flex-wrap: wrap;
+}
 aside img {
   max-width: 100%;
 }
