@@ -43,7 +43,7 @@ paragraph1.innerText="My name has "+lengthOfMyName+" characters";
 
 thirdCharacterOfMyName = myFullName.charAt(2);
 
-paragraph2.innerText=thirdCharacterOfMyName;
+paragraph2.innerText=thirdCharacterOfMyName.toUpperCase();
 // 6 Add a new line to your second paragraph
 //paragraph2.innerText="\n";
 //paragraph2.after('\n LA');
