@@ -251,6 +251,9 @@ const countries = [
   
   //document.body.append(divClass);
   
+
+
+  //l
   let orderedlist = document.createElement("ol");
   //ol into class countries
   orderedlist.className = "countries";
