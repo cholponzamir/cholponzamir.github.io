@@ -165,4 +165,3 @@ router.get("/allTasks", (req, res) => {
   });
 });
 module.exports = router;
-

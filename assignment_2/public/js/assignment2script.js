@@ -431,7 +431,7 @@ function submitNewGroup() {
 //searching
 
 const searches = [];
-let searchlink = "/AllTasks";
+let searchlink = "/allTasks";
 fetch(searchlink)
   .then(blob => blob.json())
   .then(data => searches.push(...data.data));
@@ -453,12 +453,11 @@ function displayMatches() {
   //console.log(this.value);
   const match = find(this.value, searches);
   //console.log(match);
-  const html = match
-    .map(place => {
+  const ht = match.map(place => {
       const regex = new RegExp(this.value, "gi");
       const tasksName = place.taskName.replace(
         regex,
-        `<span class="h1"> ${this.value} </span>`
+        `<span class="colorIn">${this.value}</span>`
       );
 
       return `
@@ -471,14 +470,14 @@ function displayMatches() {
     })
     .join("");
 
-  suggestions.innerHTML = html;
+  suggestions.innerHTML = ht;
 }
 
 //const searchinput = document.querySelector(".searchTask");
 //const searchinput = document.querySelector(".search");
-const searchinput = document.getElementById(".search");
-const suggestions = document.getElementById(".suggestions");
+const searchinput = document.getElementById("searchtask");
+const suggestions = document.querySelector(".suggestions");
 //searchinput.addEventListener("change", displayMatches);
 searchinput.addEventListener("keyup", displayMatches);
 
-//I am not sure why the suggestions are not popping up
+
