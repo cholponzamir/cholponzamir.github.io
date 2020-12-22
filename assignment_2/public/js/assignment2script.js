@@ -12,21 +12,23 @@ function submitTask() {
 
   console.log("TaskName:" + taskNameParam);
   console.log("taskDueDate:" + taskDueDate);
-  data = { 
-    'taskDueDate': taskDueDate, 
-    'taskName': taskNameParam, 
-    'group': group, 
-    'person': person, 
-    'priority': priority 
+  data = {
+    taskDueDate: taskDueDate,
+    taskName: taskNameParam,
+    group: group,
+    person: person,
+    priority: priority,
   };
 
-  console.log(JSON.stringify(data))
+  console.log(JSON.stringify(data));
   let taskURL = "http://localhost:4000/task";
   const fetchPromise = fetch(taskURL, {
-    method: 'POST', headers: {
-      'Content-Type': 'application/json'
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
-    }, body: JSON.stringify(data)
+    },
+    body: JSON.stringify(data),
   });
 
   fetchPromise
@@ -42,15 +44,23 @@ function submitTask() {
         taskName = task.data.name;
         taskId = task.id;
         taskDueDate = task.data.dueDate;
-        message = "Message: " + task.message + " ID: " + taskId + "<br>TaskName: " + taskName + "<br> Due Date: " + taskDueDate;
+        message =
+          "Message: " +
+          task.message +
+          " ID: " +
+          taskId +
+          "<br>TaskName: " +
+          taskName +
+          "<br> Due Date: " +
+          taskDueDate;
       }
       document.getElementById("postTaskContent").innerHTML = message;
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("postTaskContent").innerHTML = "Invalid task id: " + taskIdParam;
+      document.getElementById("postTaskContent").innerHTML =
+        "Invalid task id: " + taskIdParam;
     });
-
 }
 
 /*
@@ -81,20 +91,29 @@ function getTask() {
         taskPriority = task.data.priority;
         taskDueDate = task.data.dueDate;
         taskComplete = task.data.complete;
-        message = "ID: " + taskId + "<br>TaskName: " + taskName 
-           +  "<br>Group Name: " + taskGroupName
-           + "<br>FirstName: " + taskFirstName 
-           + "<br>TaskPriority: " + taskPriority
-           + "<br>TaskComplete: " + taskComplete
-           +  "<br> Due Date: " + taskDueDate;
+        message =
+          "ID: " +
+          taskId +
+          "<br>TaskName: " +
+          taskName +
+          "<br>Group Name: " +
+          taskGroupName +
+          "<br>FirstName: " +
+          taskFirstName +
+          "<br>TaskPriority: " +
+          taskPriority +
+          "<br>TaskComplete: " +
+          taskComplete +
+          "<br> Due Date: " +
+          taskDueDate;
       }
       document.getElementById("getTaskContent").innerHTML = message;
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("getTaskContent").innerHTML = "Invalid task id: " + taskIdParam;
+      document.getElementById("getTaskContent").innerHTML =
+        "Invalid task id: " + taskIdParam;
     });
-
 }
 
 /*
@@ -108,7 +127,7 @@ function getTaskToUpdate() {
   let taskURL = "http://localhost:4000/task?taskId=" + taskIdParam;
   const fetchPromise = fetch(taskURL);
   let message = "";
-  
+
   fetchPromise
     .then((response) => {
       return response.json();
@@ -116,7 +135,13 @@ function getTaskToUpdate() {
     .then((task) => {
       console.log("Here");
       console.log(task);
-      let taskId, taskName, taskPriority, taskDueDate, taskComplete,taskPersonId, taskGroupId;
+      let taskId,
+        taskName,
+        taskPriority,
+        taskDueDate,
+        taskComplete,
+        taskPersonId,
+        taskGroupId;
       let message = "ERROR";
       if (typeof task.data.id !== "undefined") {
         taskName = task.data.taskName;
@@ -135,26 +160,24 @@ function getTaskToUpdate() {
         document.getElementById("updateTaskId").value = taskId;
         document.getElementById("updateTaskDueDate").value = taskDueDate;
         document.getElementById("updateTaskPriority").value = taskPriority;
-        document.getElementById("updateTaskComplete").selectedIndex = taskComplete;
-        
-      }
-      else{
+        document.getElementById(
+          "updateTaskComplete"
+        ).selectedIndex = taskComplete;
+      } else {
         document.getElementById("updateTaskName").value = "";
         document.getElementById("updateTaskId").value = "";
         document.getElementById("updateTaskDueDate").value = "2020-11-30";
         document.getElementById("updateTaskComplete").value = "";
- 
+
         message = "ERROR";
       }
       //document.getElementById("updatedTaskContent").innerHTML = message;
-      
-      
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("updatedTaskContent").innerHTML = "<font color=red>Invalid task id: " + taskIdParam + "</font>";
+      document.getElementById("updatedTaskContent").innerHTML =
+        "<font color=red>Invalid task id: " + taskIdParam + "</font>";
     });
-
 }
 /*
  ------ UPDATE TASK BY ID ------
@@ -176,22 +199,26 @@ function updateTask() {
   console.log("updateTaskDueDate:" + updateTaskDueDate);
   console.log("updateTaskPriority:" + updateTaskPriority);
   console.log("updateTaskComplete:" + updateTaskComplete);
-  data = { 'taskId': updateTaskId,
-          'taskName':updateTaskName,
-          'taskFirstName':updateTaskFirstName,
-          'taskGroup':updateTaskGroup,
-          'taskDueDate':updateTaskDueDate,
-          'taskPriority': updateTaskPriority,
-          'taskComplete':updateTaskComplete };
+  data = {
+    taskId: updateTaskId,
+    taskName: updateTaskName,
+    taskFirstName: updateTaskFirstName,
+    taskGroup: updateTaskGroup,
+    taskDueDate: updateTaskDueDate,
+    taskPriority: updateTaskPriority,
+    taskComplete: updateTaskComplete,
+  };
 
-  console.log(JSON.stringify(data))
+  console.log(JSON.stringify(data));
   let taskURL = "http://localhost:4000/task?taskId=" + updateTaskId;
 
   const fetchPromise = fetch(taskURL, {
-    method: 'PUT', headers: {
-      'Content-Type': 'application/json'
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
       // 'Content-Type': 'application/x-www-form-urlencoded',
-    }, body: JSON.stringify(data)
+    },
+    body: JSON.stringify(data),
   });
 
   fetchPromise
@@ -212,9 +239,9 @@ function updateTask() {
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("updatedTaskContent").innerHTML = "Invalid task id: " + updateTaskId;
+      document.getElementById("updatedTaskContent").innerHTML =
+        "Invalid task id: " + updateTaskId;
     });
-
 }
 
 /*
@@ -227,7 +254,7 @@ function deleteTask() {
   console.log("TaskId:" + taskIdParam);
 
   let taskURL = "http://localhost:4000/task?taskId=" + taskIdParam;
-  const fetchPromise = fetch(taskURL, { method: 'DELETE' });
+  const fetchPromise = fetch(taskURL, { method: "DELETE" });
 
   fetchPromise
     .then((response) => {
@@ -245,29 +272,29 @@ function deleteTask() {
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("deleteTaskContent").innerHTML = "Invalid task id: " + taskIdParam;
+      document.getElementById("deleteTaskContent").innerHTML =
+        "Invalid task id: " + taskIdParam;
     });
-
 }
 
 /*
  ------ ADD NEW PERSON ------
 */
 function submitNewPerson() {
-
   console.log("Called submitNewPerson");
   let firstName = document.getElementById("addFirstName").value;
 
   console.log("firstName:" + firstName);
-  data = { 'firstName': firstName };
+  data = { firstName: firstName };
 
   //console.log(JSON.stringify(data))
   let personURL = "http://localhost:4000/person";
   const fetchPromise = fetch(personURL, {
-    method: 'POST', headers: {
-      'Content-Type': 'application/json'
-
-    }, body: JSON.stringify(data)
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 
   let personId;
@@ -283,95 +310,89 @@ function submitNewPerson() {
       if (typeof person.id !== "undefined") {
         firstName = person.data.firstName;
         personId = person.id;
-        message = "Message: " + person.message + " firstName: " + firstName + "<br>personId: " + personId + "<br> ";
-      }
-      else if(typeof person !== "undefined"){
-        message = "Message: " + person.message ;
+        message =
+          "Message: " +
+          person.message +
+          " firstName: " +
+          firstName +
+          "<br>personId: " +
+          personId +
+          "<br> ";
+      } else if (typeof person !== "undefined") {
+        message = "Message: " + person.message;
       }
       document.getElementById("postNewPersonContent").innerHTML = message;
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("postNewPersonContent").innerHTML = "Invalid person : " + data.firstName;
+      document.getElementById("postNewPersonContent").innerHTML =
+        "Invalid person : " + data.firstName;
     });
-
 }
-
-
-
-
-
 
 /*
    ------------   Code for onload of page ------------
    1) Fills out drop down boxes
 */
 function addPTag() {
-  let pTag = document.createElement("P");   // Create a <p> element
-  pTag.innerHTML = "Added paragraph";       // Insert text
-  document.body.appendChild(pTag);          // Append <p> to <body>
+  let pTag = document.createElement("P"); // Create a <p> element
+  pTag.innerHTML = "Added paragraph"; // Insert text
+  document.body.appendChild(pTag); // Append <p> to <body>
 }
 
 let groupValues = [];
 let settings = { method: "Get" };
 
 async function getPageData(prepend = "") {
-  await fetch('./allGroups', settings)
-    .then(res => res.json())
+  await fetch("./allGroups", settings)
+    .then((res) => res.json())
     .then((json) => {
       let listSize = json.data.length;
-      json.data.forEach(element => {
-        let optionTag = document.createElement("option");   // Create a <p> element
-        let groupName = prepend + "group"
-        optionTag.innerHTML = element.name;       // Insert text
+      json.data.forEach((element) => {
+        let optionTag = document.createElement("option"); // Create a <p> element
+        let groupName = prepend + "group";
+        optionTag.innerHTML = element.name; // Insert text
         optionTag.setAttribute("value", element.id);
-        document.getElementById(groupName).appendChild(optionTag);          // Append <p> to <body>
+        document.getElementById(groupName).appendChild(optionTag); // Append <p> to <body>
       });
-    })
+    });
 
-  await fetch('./allPeople', settings)
-    .then(res => res.json())
+  await fetch("./allPeople", settings)
+    .then((res) => res.json())
     .then((json) => {
       let listSize = json.data.length;
-      json.data.forEach(element => {
-        let optionTag = document.createElement("option");   // Create a <p> element
-        let personName = prepend + "firstName"
-        optionTag.innerHTML = element.firstName;       // Insert text
+      json.data.forEach((element) => {
+        let optionTag = document.createElement("option"); // Create a <p> element
+        let personName = prepend + "firstName";
+        optionTag.innerHTML = element.firstName; // Insert text
         optionTag.setAttribute("value", element.id);
-        document.getElementById(personName).appendChild(optionTag);          // Append <p> to <body>
+        document.getElementById(personName).appendChild(optionTag); // Append <p> to <body>
       });
-    })
-
-};
+    });
+}
 
 window.onload = async function loadPage() {
   getPageData();
   getPageData("update");
-
-
-}
-
-
+};
 
 //new group
 
-
-
 function submitNewGroup() {
-
   console.log("Called submitNewGroup");
   let newgroup = document.getElementById("addGroupName").value;
 
   console.log("Group Name:" + newgroup);
-  data = { 'name': newgroup };
+  data = { name: newgroup };
 
   //console.log(JSON.stringify(data))
   let groupURL = "http://localhost:4000/group";
   const fetchPromise = fetch(groupURL, {
-    method: 'POST', headers: {
-      'Content-Type': 'application/json'
-
-    }, body: JSON.stringify(data)
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 
   let groupId;
@@ -387,14 +408,77 @@ function submitNewGroup() {
       if (typeof group.id !== "undefined") {
         groupName = group.data.name;
         groupId = group.id;
-        message = "Message: " + group.message + " groupName: " + newgroup + "<br>groupId: " + groupId + "<br> ";
-      }
-      else if(typeof group !== "undefined"){
-        message = "Message: " + group.message ;
+        message =
+          "Message: " +
+          group.message +
+          " groupName: " +
+          newgroup +
+          "<br>groupId: " +
+          groupId +
+          "<br> ";
+      } else if (typeof group !== "undefined") {
+        message = "Message: " + group.message;
       }
       document.getElementById("postNewGroupContent").innerHTML = message;
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("postNewGroupContent").innerHTML = "Invalid group : " + data.newgroup;
-    });}
+      document.getElementById("postNewGroupContent").innerHTML =
+        "Invalid group : " + data.newgroup;
+    });
+}
+
+//searching
+
+const searches = [];
+let searchlink = "/AllTasks";
+fetch(searchlink)
+  .then(blob => blob.json())
+  .then(data => searches.push(...data.data));
+
+function find(wordmatch, searches) {
+  return searches.filter(place => {
+    //find if there is match between what is searched
+    const regex = new RegExp(wordmatch, "gi");
+    return place.taskName.match(regex) //place
+  });
+}
+
+
+
+
+
+
+function displayMatches() {
+  //console.log(this.value);
+  const match = find(this.value, searches);
+  //console.log(match);
+  const html = match
+    .map(place => {
+      const regex = new RegExp(this.value, "gi");
+      const tasksName = place.taskName.replace(
+        regex,
+        `<span class="h1"> ${this.value} </span>`
+      );
+
+      return `
+<li>
+<span class="place">${tasksName}</span>
+
+
+</li>
+`;
+    })
+    .join("");
+
+  suggestions.innerHTML = html;
+}
+
+//const searchinput = document.querySelector(".searchTask");
+//const searchinput = document.querySelector(".search");
+const searchinput = document.getElementById(".search");
+const suggestions = document.getElementById(".suggestions");
+//searchinput.addEventListener("change", displayMatches);
+searchinput.addEventListener("keyup", displayMatches);
+
+//I am not sure why the suggestions are not popping up
